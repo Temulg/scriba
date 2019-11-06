@@ -1,0 +1,41 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+group 'temulg'
+version '1.0'
+
+eclipse {
+	classpath {
+		downloadSources = true
+		downloadJavadoc = true
+	}
+}
+
+sourceSets {
+	ostraca {
+		compileClasspath += sourceSets.test.compileClasspath
+		runtimeClasspath += sourceSets.test.runtimeClasspath
+	}
+}
+
+task sourceJar(type: Jar) {
+	from sourceSets.main.allJava
+}
+
+task docJar(type: Jar, dependsOn: javadoc) {
+	from javadoc.destinationDir
+}
+
+task runTac(type: JavaExec) {
+	main = project.properties.getOrDefault('mainClass', '')
+	args project.properties.getOrDefault('cmdLineArgs', '')
+	//jvmArgs project.properties.getOrDefault('jvmLineArgs', '')
+	classpath = sourceSets.ostraca.runtimeClasspath
+}
