@@ -1,0 +1,33 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+group 'temulg'
+version '1.0'
+
+dependencies {
+	implementation project(':')
+}
+
+eclipse {
+	classpath {
+		downloadSources = true
+		downloadJavadoc = true
+	}
+}
+
+task runTac(type: JavaExec, dependsOn: [':agent:jar']) {
+	main = project.properties.getOrDefault('mainClass', '')
+	args project.properties.getOrDefault('cmdLineArgs', '')
+	jvmArgs = [
+		"-javaagent:${tasks.getByPath(':agent:jar').archivePath}=tryMe"
+	]
+	//jvmArgs project.properties.getOrDefault('jvmLineArgs', '')
+	classpath = sourceSets.main.runtimeClasspath
+}

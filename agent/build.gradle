@@ -11,6 +11,10 @@ repositories {
 group 'temulg'
 version '1.0'
 
+dependencies {
+	implementation project(':')
+}
+
 eclipse {
 	classpath {
 		downloadSources = true
@@ -24,4 +28,16 @@ task sourceJar(type: Jar) {
 
 task docJar(type: Jar, dependsOn: javadoc) {
 	from javadoc.destinationDir
+}
+
+jar {
+	baseName 'scriba-agent'
+	manifest {
+		attributes(
+			'Premain-Class': 'temulg.scriba.agent.Agent',
+			'Agent-Class': 'temulg.scriba.agent.Agent',
+			'Can-Redefine-Classes': false,
+			'Can-Retransform-Classes': true
+		)
+	}
 }

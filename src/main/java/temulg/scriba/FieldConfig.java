@@ -7,6 +7,14 @@
 package temulg.scriba;
 
 public interface FieldConfig {
+	default String caller() {
+		return "caller";
+	}
+
+	default String callerClass() {
+		return "class";
+	}
+
 	default String message() {
 		return "msg";
 	}

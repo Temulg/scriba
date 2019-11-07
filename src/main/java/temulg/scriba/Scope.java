@@ -43,127 +43,143 @@ public class Scope {
 			return this;
 	}
 
+	@Gated
 	public void say(String msg) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
-			Field.str(ctx.fieldConfig().message(), msg).visit(mbld);
+			mbld.addLabel(ctx.fieldConfig().message());
+			mbld.addString(msg);
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(String msg, Field f0) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
-			Field.str(ctx.fieldConfig().message(), msg).visit(mbld);
+			mbld.addLabel(ctx.fieldConfig().message());
+			mbld.addString(msg);
 			name.visit(mbld);
 			f0.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(String msg, Field f0, Field f1) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
-			Field.str(ctx.fieldConfig().message(), msg).visit(mbld);
+			mbld.addLabel(ctx.fieldConfig().message());
+			mbld.addString(msg);
 			name.visit(mbld);
 			f0.visit(mbld);
 			f1.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(String msg, Field f0, Field f1, Field f2) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
-			Field.str(ctx.fieldConfig().message(), msg).visit(mbld);
+			mbld.addLabel(ctx.fieldConfig().message());
+			mbld.addString(msg);
 			name.visit(mbld);
 			f0.visit(mbld);
 			f1.visit(mbld);
 			f2.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(String msg, Field f0, Field f1, Field f2, Field f3) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
-			Field.str(ctx.fieldConfig().message(), msg).visit(mbld);
+			mbld.addLabel(ctx.fieldConfig().message());
+			mbld.addString(msg);
 			name.visit(mbld);
 			f0.visit(mbld);
 			f1.visit(mbld);
 			f2.visit(mbld);
 			f3.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(String msg, Field... fs) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
-			Field.str(ctx.fieldConfig().message(), msg).visit(mbld);
+			mbld.addLabel(ctx.fieldConfig().message());
+			mbld.addString(msg);
 			name.visit(mbld);
 			for (var f: fs)
 				f.visit(mbld);
 
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(Field f0) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
 			name.visit(mbld);
 			f0.visit(mbld);
 
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(Field f0, Field f1) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
 			name.visit(mbld);
 			f0.visit(mbld);
 			f1.visit(mbld);
 
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(Field f0, Field f1, Field f2) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
 			name.visit(mbld);
 			f0.visit(mbld);
 			f1.visit(mbld);
 			f2.visit(mbld);
 
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(Field f0, Field f1, Field f2, Field f3) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
 			name.visit(mbld);
 			f0.visit(mbld);
@@ -171,14 +187,15 @@ public class Scope {
 			f2.visit(mbld);
 			f3.visit(mbld);
 
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(Field f0, Field f1, Field f2, Field f3, Field f4) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
 			name.visit(mbld);
 			f0.visit(mbld);
@@ -187,27 +204,29 @@ public class Scope {
 			f3.visit(mbld);
 			f4.visit(mbld);
 
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public void say(Field... fs) {
 		var g = ThreadContext.get().resetGate();
-		if (g.isOpen()) {
+		if (g.enabled()) {
 			var mbld = ctx.fragmentBuilder();
 			name.visit(mbld);
 			for (var f: fs)
 				f.visit(mbld);
 
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	}
 
+	@Gated
 	public CheckedScope check() {
 		var g = ThreadContext.get().resetGate();
-		return g.isOpen() ? new CheckedScope(g) : null;
+		return g.enabled() ? new CheckedScope(g) : null;
 	}
 
 	public class CheckedScope {
@@ -220,7 +239,7 @@ public class Scope {
 			Field.str(ctx.fieldConfig().message(), msg).visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -230,7 +249,7 @@ public class Scope {
 			f0.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -241,7 +260,7 @@ public class Scope {
 			f1.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -253,7 +272,7 @@ public class Scope {
 			f2.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -268,7 +287,7 @@ public class Scope {
 			f3.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -279,7 +298,7 @@ public class Scope {
 				f.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -288,7 +307,7 @@ public class Scope {
 			f0.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -298,7 +317,7 @@ public class Scope {
 			f1.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -309,7 +328,7 @@ public class Scope {
 			f2.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -321,7 +340,7 @@ public class Scope {
 			f3.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -336,7 +355,7 @@ public class Scope {
 			f4.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 	
@@ -346,7 +365,7 @@ public class Scope {
 				f.visit(mbld);
 
 			name.visit(mbld);
-			g.visit(mbld);
+			g.visit(mbld, ctx.fieldConfig());
 			ctx.deliver(mbld.build(), common);
 		}
 
